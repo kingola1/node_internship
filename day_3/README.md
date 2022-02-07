@@ -1,4 +1,4 @@
-# day 1
+# day 3
 
 ## Instructions
 
