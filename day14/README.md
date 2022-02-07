@@ -1,4 +1,4 @@
-# node_task_2
+# day 14
 
 1. Clone repo to your own github
 2. Read the configuration.json
