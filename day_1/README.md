@@ -16,12 +16,14 @@ shipping_dock
 transaction
 - id
 - order_id
+- user_id
 - shipping_dock_id
 - amount
 - notes
 
 order
 - id
+- user_id
 - amount
 - tax
 - notes
