@@ -1,6 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
-  const location = sequelize.define(
-    "location",
+  const rules = sequelize.define(
+    "rules",
     {
       id: {
         type: DataTypes.INTEGER,
@@ -8,13 +8,15 @@ module.exports = (sequelize, DataTypes) => {
         autoIncrement: true,
       },
       name: DataTypes.STRING,
+      condition: DataTypes.STRING,
+      action: DataTypes.STRING,
       created_at: DataTypes.DATEONLY,
       updated_at: DataTypes.DATE,
     },
     {
       timestamps: true,
       freezeTableName: true,
-      tableName: "location",
+      tableName: "rules",
     },
     {
       underscoredAll: false,
@@ -22,5 +24,5 @@ module.exports = (sequelize, DataTypes) => {
     }
   );
 
-  return location;
+  return rules;
 };
