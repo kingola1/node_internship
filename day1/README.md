@@ -4,7 +4,7 @@
 
 - setup project
 - clone to your github
-- Read the documentation https://sequelize.org/docs/v6/getting-started/
+- Read the documentation https://sequelize.org/docs/v7/getting-started/
 - Setup the following Models in models folder. Make sure tables made by sequelize:
 
 ```
