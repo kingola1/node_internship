@@ -54,7 +54,8 @@ DELETE /api/v1/user/:id (delete one)
 ```
 1.Loop through all active users
 2.Loop through all odd id emails if today is monday, wednesday, friday. Otherwise do all even id for other days.
-3.Write into email queue what email to send from step 2. Set status as not sent. Set send_at as next day.
+4.Loop through all the users in user table and make a table of user_id.
+3.Write into email queue for each user in step 2 (so if 3 total emails, 2 ids are odd, say there 5 users so on monday you add 2 x 5 = 10 emails into email_queue.) what email to send from step 2. Set status as not sent. Set send_at as next day.
 ```
 
 - create a cronjob called email_sending.js in cronjob folder
