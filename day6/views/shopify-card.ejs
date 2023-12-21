@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Shopify Products</title>
+	</head>
+	<body>
+		<h1>Shopify Products</h1>
+		<div id="products-container"></div>
+
+		<script>
+			// Function to fetch Shopify products using CURL
+			async function fetchShopifyProducts(page = 1, limit = 10) {
+				const apiUrl = `https://your-shopify-store.myshopify.com/admin/api/2022-01/products.json?page=${page}&limit=${limit}`;
+
+				const response = await fetch(apiUrl, {
+					method: "GET",
+					headers: {
+						Authorization: "Basic your-base64-encoded-credentials",
+					},
+				});
+
+				if (!response.ok) {
+					throw new Error(
+						`Failed to fetch Shopify products: ${response.status} ${response.statusText}`
+					);
+				}
+
+				return await response.json();
+			}
+
+			// Function to render Shopify product cards
+			function renderProductCards(products) {
+				const productsContainer =
+					document.getElementById("products-container");
+
+				products.forEach((product) => {
+					const card = document.createElement("div");
+					card.innerHTML = `
+                    <div>
+                        <img src="${
+							product.images[0]?.src || "placeholder-image-url"
+						}" alt="${product.title}">
+                        <h2>${product.title}</h2>
+                        <p>Price: ${product.variants[0]?.price || "N/A"}</p>
+                    </div>
+                `;
+					productsContainer.appendChild(card);
+				});
+			}
+
+			// Function to load and display Shopify products
+			async function loadShopifyProducts() {
+				try {
+					const productsResponse = await fetchShopifyProducts();
+					const products = productsResponse.products || [];
+
+					renderProductCards(products);
+				} catch (error) {
+					console.error(error);
+				}
+			}
+
+			// Load and display products when the page loads
+			window.onload = loadShopifyProducts;
+		</script>
+	</body>
+</html>

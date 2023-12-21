@@ -1,28 +1,28 @@
-// userRoutes.js
+// emailRoutes.js
 const express = require("express");
 const router = express.Router();
 const db = require("../models");
 
-// GET all users
+// GET all emails
 router.get("/", async (req, res) => {
 	try {
-		const users = await db.user.findAll();
-		res.json(users);
+		const emails = await db.email.findAll();
+		res.json(emails);
 	} catch (error) {
 		console.error(error);
 		res.status(500).json({ error: true, message: error });
 	}
 });
 
-// GET one user by ID
+// GET one email by ID
 router.get("/:id", async (req, res) => {
 	const id = req.params.id;
 	try {
-		const user = await db.user.findByPk(id);
-		if (user) {
-			res.json(user);
+		const email = await db.email.findByPk(id);
+		if (email) {
+			res.json(email);
 		} else {
-			res.status(404).json({ error: `User ${id} not found` });
+			res.status(404).json({ error: `Email ${id} not found` });
 		}
 	} catch (error) {
 		console.error(error);
@@ -30,27 +30,27 @@ router.get("/:id", async (req, res) => {
 	}
 });
 
-// POST add a new user
+// POST add a new email
 router.post("/", async (req, res) => {
 	try {
-		const newUser = await db.user.create({ ...req.body });
-		res.status(201).json(newUser);
+		const newEmail = await db.email.create({ ...req.body });
+		res.status(201).json(newEmail);
 	} catch (error) {
 		console.error(error);
 		res.status(500).json({ error: "Internal server error" });
 	}
 });
 
-// PUT update a user by ID
+// PUT update an email by ID
 router.put("/:id", async (req, res) => {
 	const id = req.params.id;
 	try {
-		const user = await db.user.findByPk(id);
-		if (user) {
-			await user.update({ ...req.body });
-			res.json({ message: `User ${id} updated successfully` });
+		const email = await db.email.findByPk(id);
+		if (email) {
+			await email.update({ ...req.body });
+			res.json({ message: `Email ${id} updated successfully` });
 		} else {
-			res.status(404).json({ error: `User ${id} not found` });
+			res.status(404).json({ error: `Email ${id} not found` });
 		}
 	} catch (error) {
 		console.error(error);
@@ -58,16 +58,16 @@ router.put("/:id", async (req, res) => {
 	}
 });
 
-// DELETE a user by ID
+// DELETE an email by ID
 router.delete("/:id", async (req, res) => {
 	const id = req.params.id;
 	try {
-		const user = await db.user.findByPk(id);
-		if (user) {
-			await user.destroy();
-			res.json({ message: `User ${id} deleted successfully` });
+		const email = await db.email.findByPk(id);
+		if (email) {
+			await email.destroy();
+			res.json({ message: `Email ${id} deleted successfully` });
 		} else {
-			res.status(404).json({ error: `User ${id} not found` });
+			res.status(404).json({ error: `Email ${id} not found` });
 		}
 	} catch (error) {
 		console.error(error);
